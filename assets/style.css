@@ -1,0 +1,35 @@
+*{
+    padding: 0;
+    margin: 0;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+body{
+    background-color: grey;
+}
+
+h1{
+    padding: 20px;
+}
+
+.pifagor-table{
+    padding: 20px;
+}
+
+td{
+    width: 32px;
+    height: 32px;
+    text-align: center;
+}
+
+.title{
+    background-color: bisque;
+}
+
+.title.changed{
+    background-color: salmon;
+}
+
+.change-color{
+    padding: 5px;
+}
