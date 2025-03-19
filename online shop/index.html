@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  
+  <div class="wrapper">
+    <div class="categories">
+      <h2>Categories</h2>
+      <div></div>
+    </div>
+    <div class="products">
+      <h2>Products</h2>
+      <div></div>
+    </div>
+    <div class="information">
+      <h2>Information</h2>
+      <div></div>
+    </div>
+  </div>
+  <form name="customerInfo">
+    <label for="name">Введіть ПІБ</label><br>
+    <input type="text" name="name"><br>
+    <p class="error">Неправильно вказано ПІБ</p><br>
+
+    <label for="city">Виберіть своє місто</label><br>
+    <select name="city">
+      <option value="0" selected>Місто</option>
+      <option value="Kyiv">Київ</option>
+      <option value="Kharkiv">Харків</option>
+      <option value="Lviv">Львів</option>
+      <option value="Odesa">Одеса</option>
+    </select><br>
+    <p class="error">Неправильно вказано місто</p><br>
+
+    <label for="NPdepartment">Виберіть відділення</label><br>
+    <select name="NPdepartment">
+      <option value="0" selected>Відділення</option>
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+      <option value="5">5</option>
+    </select><br>
+    <p class="error">Неправильно вказано відділення</p><br>
+
+    <label for="paymentType">Виберіть метод оплати</label><br>
+    <input type="radio" value="Male" name="paymentType"/> <label for="paymentType">Накладений платіж</label><br>
+    <input type="radio" value="Female" name="paymentType"/> <label for="paymentType">оплата на рахунок</label><br>
+    <p class="error">Не обрано тип оплати</p><br>
+
+    <label for="message">Коментар (не обовязково)</label><br>
+    <textarea name="message"></textarea><br>
+    
+    <button type="button" class="subBtn">Замовити</button>
+
+  </form>
+  
+
+  <script src="products.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

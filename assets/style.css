@@ -33,3 +33,10 @@ td{
 .change-color{
     padding: 5px;
 }
+
+.error{
+    color: red;
+    font-size: smaller;
+    margin-bottom: 10px;
+    display: none;
+}
