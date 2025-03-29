@@ -6,6 +6,12 @@ const carFormConfig = {
     // tag: 'input',
     // type: 'text',
     // placeholder: 'Enter brand',
+  },
+
+  year: {
+    regExp: /^\d{4}/,
+    errorSelector: '.year-error',
+    errorMessage: 'Year is incorrect',
   }
 };
 

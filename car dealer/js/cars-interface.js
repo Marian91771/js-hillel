@@ -4,39 +4,40 @@
 // };
 
 function createCarsInterface() {
-  const parent = document.querySelector('.wrapper');
+  const parent = document.querySelector(".wrapper");
+  parent.textContent = " ";
   generateAddButton(parent);
   generateGrid(parent);
 }
 
 function generateGrid(parent) {
   const data = getCars();
-  const gridElement = document.createElement('div');
-  gridElement.classList.add('grid');
+  const gridElement = document.createElement("div");
+  gridElement.classList.add("grid");
   generateGridHeader(gridElement);
   generateGridContent(gridElement, data);
 
-  observeGridButtons(gridElement)
+  observeGridButtons(gridElement);
 
   parent.appendChild(gridElement);
 }
 
 function observeGridButtons(gridElement) {
-  gridElement.addEventListener('click', event => {
-    if (event.target.tagName !== 'BUTTON') {
+  gridElement.addEventListener("click", (event) => {
+    if (event.target.tagName !== "BUTTON") {
       return;
     }
 
-    const buttonType = event.target.getAttribute('data-action');
-    const carId = event.target.parentNode.getAttribute('data-id');
-    
+    const buttonType = event.target.getAttribute("data-action");
+    const carId = event.target.parentNode.getAttribute("data-id");
+
     // 1
-    if (buttonType === 'view') {
+    if (buttonType === "view") {
       viewCarDetails(carId);
-    } else if (buttonType === 'edit') {
+    } else if (buttonType === "edit") {
       editCarForm(carId);
-    } else if (buttonType === 'delete') {
-      deleteCar(carId);
+    } else if (buttonType === "delete") {
+      showPopup(carId);
     }
 
     // 2
@@ -68,7 +69,7 @@ function generateGridHeader(parent) {
 }
 
 function generateGridContent(parent, cars) {
-  for(let car of cars) {
+  for (let car of cars) {
     const row = `
       <div class="row car-row">
         <div>${car.brand}</div>
@@ -88,40 +89,50 @@ function generateGridContent(parent, cars) {
 }
 
 function generateAddButton(parent) {
-  const button = document.createElement('button');
-  button.textContent = 'Add new car';
-  button.classList.add('add-button');
-  button.addEventListener('click', () => {
-    const parent = document.querySelector('.wrapper');
-    generateCarForm(parent)
-  })
+  const button = document.createElement("button");
+  button.textContent = "Add new car";
+  button.classList.add("add-button");
+  button.addEventListener("click", () => {
+    const parent = document.querySelector(".wrapper");
+    generateCarForm(parent);
+  });
   parent.appendChild(button);
 }
 
 function hideCarForm() {
-  document.querySelector('.wrapper').innerHTML = '';
+  document.querySelector(".wrapper").innerHTML = "";
 }
 
 function viewCarDetails(carId) {
   const car = getCarById(carId);
-  console.log(car);
-  // todo: show in the UI car information
+  const parent = document.querySelector(".wrapper");
+
+  const carInfo = `
+    <div class="carInfo">
+    <h3>Car Information</h3>
+    <p>Brand: ${car.brand}</p>
+    <p>Model: ${car.model}</p>
+    <p>Color: ${car.color}</p>
+    <p>Year: ${car.year}</p>
+    <p>Complectation: ${car.complectation}</p>
+  </div>
+  `;
+
+  parent.innerHTML = carInfo;
 }
 
 function deleteCar(carId) {
-  // todo: implement double-check to ensure we really want to remove the car
-  deleteCarById(carId);
-
-  const elementToBeRemoved = document.querySelector(`.car-row *[data-id="${carId}"]`).parentNode;
-  elementToBeRemoved.remove();
+    deleteCarById(carId);
+    const elementToBeRemoved = document.querySelector(`.car-row *[data-id="${carId}"]`).parentNode;
+    elementToBeRemoved.remove();
 }
 
 function editCarForm(carId) {
-  const parent = document.querySelector('.wrapper');
+  const parent = document.querySelector(".wrapper");
   generateCarForm(parent, carId);
 }
 
-function generateCarForm(parent, carId = '') {
+function generateCarForm(parent, carId = "") {
   const car = carId ? getCarById(carId) : null;
 
   // const form = document.createElement('form');
@@ -131,27 +142,36 @@ function generateCarForm(parent, carId = '') {
   // form.appendChild(itemElement)
   // }
 
-
   const form = `
     <form name="car">
       <p>
-        <input type="text" name="brand" placeholder="Enter brand" ${car ? `value="${car.brand}"` : ''}>
+        <input type="text" name="brand" placeholder="Enter brand" ${
+          car ? `value="${car.brand}"` : ""
+        }>
         <span class="error brand-error"></span>
       </p>
       <p>
-        <input type="text" name="model" placeholder="Enter model" ${car ? `value="${car.model}"` : ''}>
+        <input type="text" name="model" placeholder="Enter model" ${
+          car ? `value="${car.model}"` : ""
+        }>
         <span class="error model-error"></span>
       </p>
       <p>
-        <input type="text" name="color" placeholder="Enter color" ${car ? `value="${car.color}"` : ''}>
+        <input type="text" name="color" placeholder="Enter color" ${
+          car ? `value="${car.color}"` : ""
+        }>
         <span class="error color-error"></span>
       </p>
       <p>
-        <input type="text" name="year" placeholder="Enter year" ${car ? `value="${car.year}"` : ''}>
+        <input type="text" name="year" placeholder="Enter year" ${
+          car ? `value="${car.year}"` : ""
+        }>
         <span class="error year-error"></span>
       </p>
       <p>
-        <input type="text" name="complectation" placeholder="Enter complectation name" ${car ? `value="${car.complectation}"` : ''}>
+        <input type="text" name="complectation" placeholder="Enter complectation name" ${
+          car ? `value="${car.complectation}"` : ""
+        }>
         <span class="error complectation-error"></span>
       </p>
       <p>
@@ -167,33 +187,34 @@ function generateCarForm(parent, carId = '') {
 }
 
 function observeCarFormButton() {
-  document.querySelector('form[name="car"] button').addEventListener('click', () => {
-    const form = document.forms.car;
+  document
+    .querySelector('form[name="car"] button')
+    .addEventListener("click", () => {
+      const form = document.forms.car;
 
-    const car = {
-      brand: form.brand.value,
-      model: form.model.value,
-      year: form.year.value,
-      color: form.color.value,
-      complectation: form.complectation.value,
-    }
+      const car = {
+        brand: form.brand.value,
+        model: form.model.value,
+        year: form.year.value,
+        color: form.color.value,
+        complectation: form.complectation.value,
+      };
 
-    const carId = form.carId.value;
-    // 1 - validation
-    if (isValid(carFormConfig, car)) {
-      // 2 - create or edit
-      if (carId) {
-        car.id = carId;
-        saveCar(car, 'edit');
-      } else {
-        const id = Date.now();
-        car.id = id;
-        saveCar(car);
+      const carId = form.carId.value;
+      // 1 - validation
+      if (isValid(carFormConfig, car)) {
+        // 2 - create or edit
+        if (carId) {
+          car.id = carId;
+          saveCar(car, "edit");
+        } else {
+          const id = Date.now();
+          car.id = id;
+          saveCar(car);
+        }
+
+        hideCarForm();
+        createCarsInterface();
       }
-
-      hideCarForm();
-      createCarsInterface();
-    }
-
-  });
+    });
 }
