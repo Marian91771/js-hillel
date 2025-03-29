@@ -1,0 +1,43 @@
+nav ul {
+  display: flex;
+  list-style-type: none;
+}
+
+nav ul li {
+  margin-right: 20px;
+  cursor: pointer;
+  border: 1px solid green;
+  border-radius: 10%;
+  padding: 20px;
+  background-color: lightgreen;
+}
+
+nav ul li:hover {
+  text-decoration: underline;
+}
+
+.grid {
+  max-width: 1000px;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+}
+
+.grid .header-row {
+  font-weight: bold;
+}
+
+.grid .row > div {
+  border: 1px solid black;
+  padding: 5px;
+}
+
+.add-button {
+  margin-bottom: 5px;
+}
+
+.error {
+  color: red;
+}
