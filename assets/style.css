@@ -101,11 +101,11 @@ td{
     display: flex;
     gap: 5px;
   }
-  
+
   .dot:hover{
-    background-color: #555555;
+    background-color: #282828;
   }
   
   .dot.active{
-    background-color: #00a046;
+    background-color: #555555;
   }
