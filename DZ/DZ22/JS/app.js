@@ -1,4 +1,4 @@
-import '../style.css'
+import '../style.scss'
 import {checkValidDate} from './functions.js'
 
 // modal
