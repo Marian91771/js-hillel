@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <button type="button"
+            class="btn btn-primary btn-boo"
+            data-bs-toggle="modal"
+            data-bs-target="#exampleModal"
+            data-bs-placement="bottom"
+            data-bs-title="Tooltip on bottom">
+        Get all info
+    </button>
+
+    <button type="button"
+            class="btn btn-success"
+            id="AlertBtn">
+        Show alert
+    </button>
+
+    <div id="AlertPlaceholder"></div>
+
+    <p class="my-birthday"></p>
+
+    <form class="bootstrap-form needs-validation">
+        <div class="inputBlock">
+            <label for="inputDate" class="form-label">Birthday date</label>
+            <input type="text" class="form-control" id="inputDate" placeholder="DD/MM/YYYY">
+            <div class="invalid-feedback">Not correct date</div>
+        </div>
+        <button type="submit" class="btn btn-primary submit-btm ">Submit</button>
+    </form>
+
+    <p class="new-date"></p>
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">All info</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>My name is Marian</p>
+                    <p>this is text in modal window</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="node_modules/moment/min/moment.min.js"></script>
+    <script src="JS/script.js"></script>
+</body>
+
+</html>
