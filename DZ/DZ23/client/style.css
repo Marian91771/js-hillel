@@ -1,0 +1,28 @@
+.input-block, .ToDoElement{
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+}
+
+.input-block{
+    margin-bottom: 50px;
+}
+
+.ToDoElement{
+    justify-content: space-between;
+    padding: 10px;
+    border-radius: 15px;
+}
+
+.ToDoElement:hover{
+    background-color: rgb(229, 229, 229);
+    transition: 0.5s;
+}
+
+.form-control{
+    width: 200px;
+}
+
+.container{
+    margin-top: 50px;
+}
