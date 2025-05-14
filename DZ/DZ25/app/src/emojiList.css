@@ -1,0 +1,15 @@
+.emoji-list{
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.emojies-title{
+    text-align: center;
+}
+
+.buttons{
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
