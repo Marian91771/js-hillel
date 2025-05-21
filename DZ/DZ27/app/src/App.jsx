@@ -1,13 +1,21 @@
-import { useEffect, useState } from "react";
+import { Route, Routes, useNavigate } from 'react-router-dom';
+import { useEffect, useState } from "react"
 import ContactsList from './components/contactsList';
 import AddContact from './components/addContact';
+import ErrorPage from './components/ErrorPage';
+import LanguageContext from './LanguageContext';
+import ThemContext from './ThemContext';
+import Header from './components/Header';
 import './App.css';
 
 
 function App() {
-  const [activePage, setActivePage] = useState(null);
+  const navigate = useNavigate();
   const [contacts, setContacts] = useState([]);
   const [contactToEdit, setContactToEdit] = useState(null);
+  const [language, setLanguage] = useState('EN');
+  const [them, setThem] = useState('dark');
+
 
   useEffect(() => {
     async function sendRequest() {
@@ -18,6 +26,10 @@ function App() {
 
     sendRequest();
   }, []);
+
+  useEffect(() => {
+    document.body.className = them;
+  }, [them])
 
   // const handleAdd = (firstName, lastName, phone) => {
   //   const newContact = {
@@ -30,7 +42,7 @@ function App() {
   //   const updatedContacts = [...contacts, newContact];
 
   //   setContacts(updatedContacts);
-  //   setActivePage('ContactsList')
+  //   navigate('/');
 
   // }
 
@@ -63,7 +75,7 @@ function App() {
 
       setContacts(updatedContacts);
     }
-    setActivePage('ContactsList');
+    navigate('/');
   }
 
   const handleDelete = (id) => {
@@ -73,39 +85,29 @@ function App() {
 
   const handleEdit = (contact) => {
     setContactToEdit(contact);
-    setActivePage('AddContact');
+    navigate('/add');
   };
 
   const onCancel = () => {
     setContactToEdit(null);
-    setActivePage('ContactsList');
-  }
+    navigate('/');
+  } 
 
   return (
     <>
-      <div className="buttons">
-        <button onClick={() => {
-          setActivePage('ContactsList')
-          setContactToEdit(null);
-        }
-        }>Contacts</button>
-        <button onClick={() => setActivePage('AddContact')}>Add Contact</button>
-      </div>
+      <LanguageContext.Provider value={{ value: language, change: setLanguage }}>
+        <ThemContext.Provider value={{ value: them, change: setThem }}>
+          <div className={them === 'light' ? 'light' : 'dark'}>
+            <Header />
+            <Routes>
+              <Route path='/' element={<ContactsList contacts={contacts} onDelete={handleDelete} onEdit={handleEdit} />} />
+              <Route path='/add' element={<AddContact onAdd={handleAddorUppdate} contactToEdit={contactToEdit} onCancel={onCancel} />} />
+              <Route path='*' element={<ErrorPage />} />
+            </Routes>
+          </div>
+        </ThemContext.Provider>
+      </LanguageContext.Provider>
 
-      {activePage === 'ContactsList' &&
-        <ContactsList
-          contacts={contacts}
-          onDelete={handleDelete}
-          onEdit={handleEdit}
-        />
-      }
-      {activePage === 'AddContact' &&
-        <AddContact
-          onAdd={handleAddorUppdate}
-          contactToEdit={contactToEdit}
-          onCancel={onCancel}
-        />
-      }
     </>
   );
 }
