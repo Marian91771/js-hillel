@@ -2,6 +2,7 @@ import './ContactsList.css'
 import LanguageContext from '../LanguageContext';
 import { useContext } from 'react';
 
+
 export default function ContactsList({contacts, onDelete, onEdit}) {
 
     const language = useContext(LanguageContext)

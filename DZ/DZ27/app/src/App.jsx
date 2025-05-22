@@ -7,6 +7,7 @@ import LanguageContext from './LanguageContext';
 import ThemContext from './ThemContext';
 import Header from './components/Header';
 import './App.css';
+import LoginPage from './components/LoginPage';
 
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
   const [contactToEdit, setContactToEdit] = useState(null);
   const [language, setLanguage] = useState('EN');
   const [them, setThem] = useState('dark');
+  const [isAuth, setAuth] = useState(false);
 
 
   useEffect(() => {
@@ -93,6 +95,10 @@ function App() {
     navigate('/');
   } 
 
+  const onAuth = () => {
+    setAuth(true)
+  }
+
   return (
     <>
       <LanguageContext.Provider value={{ value: language, change: setLanguage }}>
@@ -100,8 +106,9 @@ function App() {
           <div className={them === 'light' ? 'light' : 'dark'}>
             <Header />
             <Routes>
-              <Route path='/' element={<ContactsList contacts={contacts} onDelete={handleDelete} onEdit={handleEdit} />} />
-              <Route path='/add' element={<AddContact onAdd={handleAddorUppdate} contactToEdit={contactToEdit} onCancel={onCancel} />} />
+              {isAuth && <Route path='/' element={<ContactsList contacts={contacts} onDelete={handleDelete} onEdit={handleEdit} />} />}
+              {isAuth && <Route path='/add' element={<AddContact onAdd={handleAddorUppdate} contactToEdit={contactToEdit} onCancel={onCancel} />} />}
+              <Route path='/login' element={<LoginPage onAuth={onAuth}/>}/>
               <Route path='*' element={<ErrorPage />} />
             </Routes>
           </div>

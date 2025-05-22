@@ -1,0 +1,22 @@
+.errorMassage{
+    color: rgb(196, 66, 66);
+}
+
+form{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+    margin-top: 20px;
+}
+
+input{
+    width: 300px;
+    height: 30px;
+}
+
+label{
+    width: 300px;
+    text-align: start;
+}
+
